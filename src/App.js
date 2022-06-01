@@ -11,7 +11,7 @@ function App() {
         <Switch>
           <Route exact path={"/Medicine"} component={Medicine} />
           <Route exact path={"/Doctor"} component={Doctor} />
-          <Route exact path={"/Btn"} component={Layout_Btn}/>
+          {/* <Route exact path={"/Btn"} component={Layout_Btn}/> */}
         </Switch>
       </Layout>
     </>
