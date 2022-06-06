@@ -1,4 +1,4 @@
-import * as React  from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
@@ -14,10 +14,12 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-export default function Medicine() {
+function Medicine(props) {
     const [open, setOpen] = React.useState(false);
-    const [data, setData] = React.useState([]);
-    const [update, setUpdate] = React.useState();
+    const [data, setData] = useState([]);
+    const [update, setUpdate] = useState();
+    const [Dopen, setDOpen] = React.useState(false);
+    const [Did, setDid] = useState();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -28,7 +30,14 @@ export default function Medicine() {
         setOpen(false);
         setUpdate();
         formik.resetForm();
+        setDOpen(false);
     };
+
+    const handleClickDOpen = (id) => {
+        setDOpen(true);
+        setDid(id);
+    };
+
 
 
     let medicine = {
@@ -102,7 +111,7 @@ export default function Medicine() {
         {
             field: 'Delete', headerName: 'Delete', width: 130,
             renderCell: (params) => (
-                <IconButton aria-label="delete" onClick={() => handleDelete(params.row.id)}>
+                <IconButton aria-label="delete" onClick={() => handleClickDOpen(params.id)}>
                     <DeleteIcon />
                 </IconButton>
             )
@@ -126,10 +135,12 @@ export default function Medicine() {
     const handleDelete = (id) => {
         let localData = JSON.parse(localStorage.getItem("medicine"))
 
-        let filterData = localData.filter((v, i) => v.id !== id);
+        let filterData = localData.filter((v, i) => v.id !== Did);
 
         localStorage.setItem("medicine", JSON.stringify(filterData));
-        loadData()
+        loadData();
+        setDOpen();
+
     }
 
     const loadData = () => {
@@ -140,7 +151,7 @@ export default function Medicine() {
         }
     }
 
-    React.useEffect(
+    useEffect(
         () => {
             loadData();
         },
@@ -150,22 +161,23 @@ export default function Medicine() {
         <Box>
             <Container>
                 <div>
+
+
                     <center>
-                        
-                        <Button variant="outlined" onClick={handleClickOpen}>
+                        <h1 className='mb-5'>Medicines</h1>
+                        <Button className='mt-5' variant="outlined" onClick={handleClickOpen}>
                             Add Medicine
                         </Button>
                     </center>
-                    <div style={{ height: 400, width: '100%' }}>
+
+                    <div style={{ height: 400, width: '100%', margin: '30px' }}>
                         <DataGrid
                             rows={data}
                             columns={columns}
-
                             pageSize={5}
                             rowsPerPageOptions={[5]}
                             checkboxSelection
                         />
-
                     </div>
                     <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>Add Medicine</DialogTitle>
@@ -233,6 +245,24 @@ export default function Medicine() {
                             </Form>
                         </Formik>
                     </Dialog>
+
+
+                    <Dialog
+                        open={Dopen}
+                        onClose={handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">
+                            {"Are You Sure Delete Data?"}
+                        </DialogTitle>
+                        <DialogActions>
+                            <Button onClick={handleClose}>NO</Button>
+                            <Button onClick={handleDelete}>
+                                YES
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
             </Container>
         </Box>
@@ -241,3 +271,4 @@ export default function Medicine() {
 
 }
 
+export default Medicine;
