@@ -150,6 +150,7 @@ export default function Layout({ children }) {
                                     px: 2.5,
                                 }}
                             >
+                                
                                 <ListItemIcon
                                     sx={{
                                         minWidth: 0,
@@ -157,36 +158,10 @@ export default function Layout({ children }) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {i % 2 === 0 ? <MedicalServicesIcon /> : <PersonIcon />}
+                                    {i % 2 === 0 ? <MedicalServicesIcon />  : <PersonIcon />}
                                    
                                 </ListItemIcon>
                                 <ListItemText primary={t.lable} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-
-                <Divider />
-                <List>
-                    {list.map((t, i) => (
-                        <ListItem component={NavLink} exact to={t.to} key={t} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {i % 2 === 0 ? <SupervisedUserCircleIcon /> : <FeedIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={t.label} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
