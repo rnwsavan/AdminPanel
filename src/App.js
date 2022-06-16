@@ -11,7 +11,9 @@ function App() {
           <Route exact path={"/Medicine"} component={Medicine} />
           <Route exact path={"/Doctor"} component={Doctor} />
         </Switch>
+       
       </Layout>
+     
     </>
   );
 }
