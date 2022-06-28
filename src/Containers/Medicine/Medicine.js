@@ -8,7 +8,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
-import { Form, Formik, FormikConsumer, FormikProvider, useFormik } from 'formik';
+import { Form, Formik, useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -20,6 +20,7 @@ function Medicine(props) {
     const [update, setUpdate] = useState();
     const [Dopen, setDOpen] = React.useState(false);
     const [Did, setDid] = useState();
+    const [FilterData, setFilterData] = useState([]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -157,11 +158,41 @@ function Medicine(props) {
         },
         [])
 
+        const handlesearch = (ser) => {
+            let searchData = JSON.parse(localStorage.getItem("medicine"))
+
+            let fData = searchData.filter((l) => (l.id.toString().includes(ser) ||
+            l.name.toString().toLowerCase().includes(ser.toLowerCase()) ||
+            l.price.toString().includes(ser) ||
+            l.quantity.toString().includes(ser) ||
+            l.expiry.toString().includes(ser)
+            ));
+
+            setFilterData(fData);
+
+           
+            // console.log(fData);
+
+            // console.log(searchData);
+            // console.log(ser);
+        }
+        const filterResult = FilterData.length > 0 ? FilterData : data;
+
+
     return (
         <Box>
             <Container>
                 <div>
 
+                    <TextField
+                        margin="dense"
+                        id="search"
+                        label="search"
+                        type="search"
+                        fullWidth
+                        variant="standard"
+                        onChange={(e) => handlesearch(e.target.value)}
+                    />
 
                     <center>
                         <h1 className='mb-5'>Medicines</h1>
@@ -172,7 +203,7 @@ function Medicine(props) {
 
                     <div style={{ height: 400, width: '100%', margin: '30px' }}>
                         <DataGrid
-                            rows={data}
+                            rows={filterResult}
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
@@ -193,9 +224,10 @@ function Medicine(props) {
                                         fullWidth
                                         variant="standard"
                                         onChange={formik.handleChange}
-                                        defaultValue={formik.values.name}
-                                        helperText={formik.errors.name}
-                                        error={formik.errors.name ? true : false}
+                                         defaultValue={formik.values.name}
+                                        // helperText={formik.errors.name}
+                                        error={formik.errors.name && formik.touched.name}
+                                        onBlur={formik.handleBlur}
 
                                     />
 
@@ -207,9 +239,10 @@ function Medicine(props) {
                                         fullWidth
                                         variant="standard"
                                         onChange={formik.handleChange}
-                                        defaultValue={formik.values.price}
-                                        helperText={formik.errors.price}
-                                        error={formik.errors.price ? true : false}
+                                         defaultValue={formik.values.price}
+                                        // helperText={formik.errors.price}
+                                        error={formik.errors.price && formik.touched.price}
+                                        onBlur={formik.handleBlur}
                                     />
                                     <TextField
                                         margin="dense"
@@ -218,10 +251,10 @@ function Medicine(props) {
                                         fullWidth
                                         variant="standard"
                                         onChange={formik.handleChange}
-                                        defaultValue={formik.values.quantity}
-                                        helperText={formik.errors.quantity}
-                                        error={formik.errors.quantity ? true : false}
-
+                                         defaultValue={formik.values.quantity}
+                                        // helperText={formik.errors.quantity}
+                                        error={formik.errors.quantity && formik.touched.quantity}
+                                        onBlur={formik.handleBlur}
                                     />
                                     <TextField
                                         margin="dense"
@@ -231,8 +264,9 @@ function Medicine(props) {
                                         variant="standard"
                                         onChange={formik.handleChange}
                                         defaultValue={formik.values.expiry}
-                                        helperText={formik.errors.expiry}
-                                        error={formik.errors.expiry ? true : false}
+                                        // helperText={formik.errors.expiry}
+                                        error={formik.errors.expiry && formik.touched.expiry}
+                                        onBlur={formik.handleBlur}
                                     />
                                     <DialogActions>
                                         <Button onClick={handleClose}>Cancel</Button>
