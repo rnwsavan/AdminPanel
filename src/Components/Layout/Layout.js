@@ -7,7 +7,6 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -19,8 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import PersonIcon from '@mui/icons-material/Person';
 import { NavLink } from 'react-router-dom';
-import FeedIcon from '@mui/icons-material/Feed';
-import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import HourglassFullIcon from '@mui/icons-material/HourglassFull';
 
 const drawerWidth = 240;
 
@@ -104,13 +102,10 @@ export default function Layout({ children }) {
     let listItem = [
         { lable: 'Medicine', to: '/medicine', icon: <MedicalServicesIcon /> },
         { lable: 'Doctor', to: '/doctor', icon: <PersonIcon /> },
+        { lable: 'Counter', to: '/counter', icon: < HourglassFullIcon /> }
         
     ]
-    let list=[
-        { lable: 'Doctor', to: '/doctor', icon: <SupervisedUserCircleIcon /> },
-        { lable: 'Button', to: '/Btn', icon: <FeedIcon /> }
-    ]
-
+    
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -174,5 +169,4 @@ export default function Layout({ children }) {
         </Box>
 
     );
-    <Layout fampla={listItem} />
 }
