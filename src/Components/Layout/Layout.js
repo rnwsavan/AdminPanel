@@ -153,7 +153,8 @@ export default function Layout({ children }) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {i % 2 === 0 ? <MedicalServicesIcon />  : <PersonIcon />}
+                                    {/* {i % 2 === 0 ? <MedicalServicesIcon />  : <PersonIcon />} */}
+                                    {t.icon}
                                    
                                 </ListItemIcon>
                                 <ListItemText primary={t.lable} sx={{ opacity: open ? 1 : 0 }} />
