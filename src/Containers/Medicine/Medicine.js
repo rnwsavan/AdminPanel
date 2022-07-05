@@ -13,8 +13,9 @@ import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import Counter from '../Counter/Counter';
+import { GetMedicine } from '../../Redux/Action/medicine.action';
 
 function Medicine(props) {
     const [open, setOpen] = React.useState(false);
@@ -156,8 +157,13 @@ function Medicine(props) {
         }
     }
 
+        const dispatch = useDispatch()
+        const medi = useSelector(state => state.medikit)
+        console.log(medi);
+
     useEffect(
         () => {
+            dispatch(GetMedicine())
             loadData();
         },
         [])
