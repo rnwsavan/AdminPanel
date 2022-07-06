@@ -9,8 +9,16 @@ const initialstate = {
 
 
 export const medicineReducer = (state=initialstate, action) => {
-    console.log(action.type, action.payload);
+    console.log( action.payload);
     switch(action.type){
+
+        case ActionType.LOADING_MEDICINE:
+            return{
+                ...state,
+                isLoading: true,
+                medicines: [],
+                error: ''
+            }
         
         case ActionType.GET_MEDICINES:
             return{
@@ -18,6 +26,14 @@ export const medicineReducer = (state=initialstate, action) => {
                 isLoading: false,
                 medicines: action.payload,
                 error: ''
+            }
+
+            case ActionType.ERROR_MEDICINE:
+            return{
+                ...state,
+                isLoading: false,
+                medicines: [],
+                error: action.payload
             }
 
         default : return state    
