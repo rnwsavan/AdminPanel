@@ -1,44 +1,51 @@
 {
-    "medicines": [
-        {
-            "id": 1,
-            "name": "abc",
-            "price": 50
-        },
-        {
-            "id": 2,
-            "name":"mer",
-            "price": 60
-        },
-        {
-            "id": 3,
-            "name": "dfg",
-            "price": 70
-        },
-        {
-            "id": 4,
-            "name": "hty",
-            "price": 80
-        },
-        {
-            "id": 5,
-            "name": "pler",
-            "price": 90
-        },
-        {
-            "id": 6,
-            "name": "qwde",
-            "price": 100
-        }
-    ],
-    "comments": [
-        {
-            "id": 1,
-            "body": "some comment",
-            "postId": 1
-        }
-    ],
-    "profile": {
-        "name": "typicode"
+  "medicines": [
+    {
+      "id": 1,
+      "name": "abc",
+      "price": 50
+    },
+    {
+      "id": 2,
+      "name": "mer",
+      "price": 60
+    },
+    {
+      "id": 3,
+      "name": "dfg",
+      "price": 70
+    },
+    {
+      "id": 4,
+      "name": "hty",
+      "price": 80
+    },
+    {
+      "id": 5,
+      "name": "pler",
+      "price": 90
+    },
+    {
+      "id": 6,
+      "name": "qwde",
+      "price": 100
+    },
+    {
+      "id": 506,
+      "name": "gfd",
+      "price": "20",
+      "quantity": "200",
+      "expiry": "2021"
     }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
 }

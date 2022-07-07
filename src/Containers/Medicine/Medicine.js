@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSelector, useDispatch } from 'react-redux';
-import { getMedicine } from '../../Redux/Action/medicine.action';
+import { addMedicineData, getMedicine } from '../../Redux/Action/medicine.action';
 
 function Medicine(props) {
     const [open, setOpen] = React.useState(false);
@@ -97,13 +97,8 @@ function Medicine(props) {
             id: Math.floor(Math.random() * 1000),
             ...value
         }
-
-        if (localdata === null) {
-            localStorage.setItem("medicine", JSON.stringify([data]))
-        } else {
-            localdata.push(data)
-            localStorage.setItem("medicine", JSON.stringify(localdata))
-        }
+        console.log(data);
+        dispatch(addMedicineData(data))
         setOpen(false);
         // loadData();
     }
@@ -157,8 +152,8 @@ function Medicine(props) {
     // }
 
     const dispatch = useDispatch();
-    const medi = useSelector(state => state.medikit)
-    console.log(medi.medicine);
+    const medical = useSelector(state => state.medikit)
+    console.log(medical.medicine);
 
     useEffect(
         () => {
@@ -191,12 +186,12 @@ function Medicine(props) {
     return (
         <>
             {
-                medi.isLoading ? (
+                medical.isLoading ? (
                     <p>....isLoading</p>
                 ) :
                     (
-                        medi.error !== '' ?
-                            <p>{medi.error}</p>
+                        medical.error !== '' ?
+                            <p>{medical.error}</p>
                             : <Box>
                                 <Container>
                                     <div>
@@ -221,7 +216,7 @@ function Medicine(props) {
 
                                         <div style={{ height: 400, width: '100%', margin: '30px' }}>
                                             <DataGrid
-                                                rows={medi.medicines}
+                                                rows={medical.medicines}
                                                 columns={columns}
                                                 pageSize={5}
                                                 rowsPerPageOptions={[5]}
