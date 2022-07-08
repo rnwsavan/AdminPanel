@@ -14,11 +14,11 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSelector, useDispatch } from 'react-redux';
-import { addMedicineData, getMedicine } from '../../Redux/Action/medicine.action';
+import { addMedicineData, deleteMedicine, getMedicine } from '../../Redux/Action/medicine.action';
 
 function Medicine(props) {
     const [open, setOpen] = React.useState(false);
-    // const [data, setData] = useState([]);
+    const [data, setData] = useState([]);
     const [update, setUpdate] = useState();
     const [Dopen, setDOpen] = React.useState(false);
     const [Did, setDid] = useState();
@@ -133,14 +133,14 @@ function Medicine(props) {
 
 
     const handleDelete = (id) => {
-        let localData = JSON.parse(localStorage.getItem("medicine"))
+        // let localData = JSON.parse(localStorage.getItem("medicine"))
 
-        let filterData = localData.filter((v, i) => v.id !== Did);
+        // let filterData = localData.filter((v, i) => v.id !== Did);
 
-        localStorage.setItem("medicine", JSON.stringify(filterData));
+        // localStorage.setItem("medicine", JSON.stringify(filterData));
         // loadData();
         setDOpen();
-
+        dispatch(deleteMedicine(Did));
     }
 
     // const loadData = () => {
@@ -187,7 +187,7 @@ function Medicine(props) {
         <>
             {
                 medical.isLoading ? (
-                    <p>....isLoading</p>
+                    <p>Please Wait...</p>
                 ) :
                     (
                         medical.error !== '' ?

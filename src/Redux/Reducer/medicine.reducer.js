@@ -43,6 +43,14 @@ export const medicineReducer = (state=initialstate, action) => {
                 error: ''
             }
 
+            case ActionType.DELETE_MEDICINE:
+            return{
+                ...state,
+                isLoading: false,
+                medicines: state.medicines.filter((d,i)=>d.id !== action.payload),
+                error: ''
+            }
+
         default : return state    
 
     }
