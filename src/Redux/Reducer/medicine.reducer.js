@@ -51,6 +51,21 @@ export const medicineReducer = (state=initialstate, action) => {
                 error: ''
             }
 
+            case ActionType.UPDATE_MEDICINE:
+            return{
+                ...state,
+                isLoading: false,
+                medicines: state.medicines.map((l)=>{
+                    if(l.id === action.payload.id){
+                        return action.payload
+                    }
+                    else{
+                        return l;
+                    }
+                }),
+                error: ''
+            }
+
         default : return state    
 
     }

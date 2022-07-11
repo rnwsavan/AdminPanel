@@ -105,3 +105,34 @@ export const deleteMedicine = (id) => (dispatch) => {
     dispatch(errorMedicine(error))
   }
 }
+
+export const upadateMedicine = (data) => (dispatch) => {
+  try {
+    return fetch(BASE_URL + 'medicines/' + data.id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+        error => {
+          var errmess = new Error(error.message);
+          throw errmess;
+        })
+      .then(response => response.json())
+      .then(medicine => dispatch(({ type: ActionType.UPDATE_MEDICINE, payload: medicine })))
+      .catch(error => dispatch(errorMedicine(error.message)))
+  }
+  catch (error) {
+    dispatch(errorMedicine(error))
+  }
+}

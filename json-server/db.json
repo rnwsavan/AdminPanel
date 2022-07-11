@@ -3,7 +3,9 @@
     {
       "id": 5,
       "name": "pler",
-      "price": 90
+      "price": 90,
+      "quantity": "22",
+      "expiry": "2022"
     },
     {
       "id": 6,
@@ -25,11 +27,18 @@
       "expiry": "2022"
     },
     {
-      "id": 562,
-      "name": "kevin",
-      "price": "36",
-      "quantity": "2",
-      "expiry": "2020"
+      "id": 260,
+      "name": "sagar",
+      "price": "32",
+      "quantity": "21",
+      "expiry": "2023"
+    },
+    {
+      "id": 920,
+      "name": "asodariyasavan",
+      "price": "56",
+      "quantity": "50",
+      "expiry": "2027"
     }
   ],
   "comments": [

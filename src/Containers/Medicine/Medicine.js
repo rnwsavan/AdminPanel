@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSelector, useDispatch } from 'react-redux';
-import { addMedicineData, deleteMedicine, getMedicine } from '../../Redux/Action/medicine.action';
+import { addMedicineData, deleteMedicine, getMedicine, upadateMedicine } from '../../Redux/Action/medicine.action';
 
 function Medicine(props) {
     const [open, setOpen] = React.useState(false);
@@ -75,15 +75,17 @@ function Medicine(props) {
         }
     })
     const handleUpdate = (value) => {
-        let localData = JSON.parse(localStorage.getItem("medicine"))
-        let udata = localData.map((l, i) => {
-            if (l.id === value.id) {
-                return (value)
-            } else {
-                return l;
-            }
-        })
-        localStorage.setItem("medicine", JSON.stringify(udata));
+        console.log(value);
+        // let localData = JSON.parse(localStorage.getItem("medicine"))
+        // let udata = localData.map((l, i) => {
+        //     if (l.id === value.id) {
+        //         return (value)
+        //     } else {
+        //         return l;
+        //     }
+        // })
+        // localStorage.setItem("medicine", JSON.stringify(udata));
+        dispatch(upadateMedicine(value))
         setOpen(false)
         setUpdate()
         // loadData()
@@ -129,6 +131,7 @@ function Medicine(props) {
         setOpen(true)
         setUpdate(data)
         formik.setValues(data);
+        console.log()
     }
 
 
@@ -187,11 +190,11 @@ function Medicine(props) {
         <>
             {
                 medical.isLoading ? (
-                    <p>Please Wait...</p>
+                    <p style={{ fontSize: '25px', fontWeight: 'bold', margin: '50px' }}>Please Wait...</p>
                 ) :
                     (
                         medical.error !== '' ?
-                            <p>{medical.error}</p>
+                            <p style={{ fontSize: '25px', fontWeight: 'bold', margin: '50px' }}>{medical.error}</p>
                             : <Box>
                                 <Container>
                                     <div>
