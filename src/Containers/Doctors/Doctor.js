@@ -13,6 +13,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { useSelector, useDispatch } from 'react-redux';
+import { addDoctorData, deleteDoctor, getDoctor, upadateDoctor } from '../../Redux/Action/doctor.action';
 
 function Doctor(props) {
     const [open, setOpen] = React.useState(false);
@@ -68,18 +70,19 @@ function Doctor(props) {
     })
 
     const handleUpdate = (value) => {
-        let localData = JSON.parse(localStorage.getItem("doctor"))
-        let udata = localData.map((l, i) => {
-            if (l.id === value.id) {
-                return (value)
-            } else {
-                return l;
-            }
-        })
-        localStorage.setItem("doctor", JSON.stringify(udata));
+        // let localData = JSON.parse(localStorage.getItem("doctor"))
+        // let udata = localData.map((l, i) => {
+        //     if (l.id === value.id) {
+        //         return (value)
+        //     } else {
+        //         return l;
+        //     }
+        // })
+        // localStorage.setItem("doctor", JSON.stringify(udata));
+        dispatch(upadateDoctor(value))
         setOpen(false)
         setUpdate()
-        loadData()
+        // loadData()
         formik.setValues()
     }
 
@@ -98,7 +101,8 @@ function Doctor(props) {
             localStorage.setItem("doctor", JSON.stringify(localdata))
         }
         setOpen(false);
-        loadData();
+        dispatch(addDoctorData(data))
+        // loadData();
     }
     const columns = [
 
@@ -130,139 +134,157 @@ function Doctor(props) {
     }
 
     const handleDelete = (id) => {
-        let localData = JSON.parse(localStorage.getItem("doctor"))
+        // let localData = JSON.parse(localStorage.getItem("doctor"))
 
-        let filterData = localData.filter((v, i) => v.id !== Did);
+        // let filterData = localData.filter((v, i) => v.id !== Did);
 
-        localStorage.setItem("doctor", JSON.stringify(filterData));
-        loadData();
+        // localStorage.setItem("doctor", JSON.stringify(filterData));
+        dispatch(deleteDoctor(Did))
+        // loadData();
         setDOpen();
 
     }
 
-    const loadData = () => {
-        let localData = JSON.parse(localStorage.getItem("doctor"))
+    // const loadData = () => {
+    //     let localData = JSON.parse(localStorage.getItem("doctor"))
 
-        if (localData !== null) {
-            setData(localData)
-        }
-    }
+    //     if (localData !== null) {
+    //         setData(localData)
+    //     }
+    // }
+
+    const dispatch = useDispatch();
+    const doctorname = useSelector(state => state.doctordata)
 
     useEffect(
         () => {
-            loadData();
+            // loadData();
+            dispatch(getDoctor())
         },
         [])
 
     return (
-        <Box>
-            <Container>
-                <div>
-
-
-                    <center>
-                        <h1 className='mb-5'>Doctor Data</h1>
-                        <Button className='mt-5' variant="outlined" onClick={handleClickOpen}>
-                            Add Doctor Data
-                        </Button>
-                    </center>
-
-                    <div style={{ height: 400, width: '100%', margin: '30px' }}>
-                        <DataGrid
-                            rows={data}
-                            columns={columns}
-                            pageSize={5}
-                            rowsPerPageOptions={[5]}
-                            checkboxSelection
-                        />
-                    </div>
-                    <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>Add Doctor Data</DialogTitle>
-                        <Formik value={formik}>
-                            <Form onSubmit={formik.handleSubmit}>
-                                <DialogContent>
-
-                                    <TextField
-                                        margin="dense"
-                                        id="name"
-                                        label="name"
-                                        type="name"
-                                        fullWidth
-                                        variant="standard"
-                                        onChange={formik.handleChange}
-                                        defaultValue={formik.values.name}
-                                        helperText={formik.errors.name}
-                                        error={formik.errors.name ? true : false}
-
-                                    />
-
-                                    <TextField
-                                        margin="dense"
-                                        id="age"
-                                        label="age"
-                                        type="age"
-                                        fullWidth
-                                        variant="standard"
-                                        onChange={formik.handleChange}
-                                        defaultValue={formik.values.age}
-                                        helperText={formik.errors.age}
-                                        error={formik.errors.age ? true : false}
-                                    />
-                                    <TextField
-                                        margin="dense"
-                                        id="email"
-                                        label="email"
-                                        fullWidth
-                                        variant="standard"
-                                        onChange={formik.handleChange}
-                                        defaultValue={formik.values.email}
-                                        helperText={formik.errors.email}
-                                        error={formik.errors.email ? true : false}
-
-                                    />
-                                    <TextField
-                                        margin="dense"
-                                        id="degree"
-                                        label="degree"
-                                        fullWidth
-                                        variant="standard"
-                                        onChange={formik.handleChange}
-                                        defaultValue={formik.values.degree}
-                                        helperText={formik.errors.degree}
-                                        error={formik.errors.degree ? true : false}
-                                    />
-                                    <DialogActions>
-                                        <Button onClick={handleClose}>Cancel</Button>
-                                        {
-                                            update ? <Button type="submit">Update</Button> :
-                                                <Button type="submit">Submit</Button>
-                                        }
-                                    </DialogActions>
-                                </DialogContent>
-                            </Form>
-                        </Formik>
-                    </Dialog>
-
-
-                    <Dialog
-                        open={Dopen}
-                        onClose={handleClose}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                    >
-                        <DialogTitle id="alert-dialog-title">
-                            {"Are You Sure Delete Data?"}
-                        </DialogTitle>
-                        <DialogActions>
-                            <Button onClick={handleClose}>NO</Button>
-                            <Button onClick={handleDelete}>
-                                YES
+       <>
+            {
+                doctorname.isLoading ? (
+                    <p style={{ fontSize: '25px', fontWeight: 'bold', margin: '50px' }}>Please Loading...</p>
+                ):
+                (doctorname.error !== '' ?
+                <p style={{ fontSize: '25px', fontWeight: 'bold', margin: '50px' }}>{doctorname.error}</p>
+                : <Box>
+                <Container>
+                    <div>
+    
+    
+                        <center>
+                            <h1 className='mb-5'>Doctor Data</h1>
+                            <Button className='mt-5' variant="outlined" onClick={handleClickOpen}>
+                                Add Doctor Data
                             </Button>
-                        </DialogActions>
-                    </Dialog>
-                </div>
-            </Container>
-        </Box>
+                        </center>
+    
+                        <div style={{ height: 400, width: '100%', margin: '30px' }}>
+                            <DataGrid
+                                rows={doctorname.doctors}
+                                columns={columns}
+                                pageSize={5}
+                                rowsPerPageOptions={[5]}
+                                checkboxSelection
+                            />
+                        </div>
+                        <Dialog open={open} onClose={handleClose}>
+                            <DialogTitle>Add Doctor Data</DialogTitle>
+                            <Formik value={formik}>
+                                <Form onSubmit={formik.handleSubmit}>
+                                    <DialogContent>
+    
+                                        <TextField
+                                            margin="dense"
+                                            id="name"
+                                            label="name"
+                                            type="name"
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={formik.handleChange}
+                                            defaultValue={formik.values.name}
+                                            helperText={formik.errors.name}
+                                            error={formik.errors.name && formik.touched.name}
+                                            onBlur={formik.handleBlur}
+    
+                                        />
+    
+                                        <TextField
+                                            margin="dense"
+                                            id="age"
+                                            label="age"
+                                            type="age"
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={formik.handleChange}
+                                            defaultValue={formik.values.age}
+                                            helperText={formik.errors.age}
+                                            error={formik.errors.age && formik.touched.age}
+                                            onBlur={formik.handleBlur}
+                                        />
+                                        <TextField
+                                            margin="dense"
+                                            id="email"
+                                            label="email"
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={formik.handleChange}
+                                            defaultValue={formik.values.email}
+                                            helperText={formik.errors.email}
+                                            error={formik.errors.email && formik.touched.email}
+                                            onBlur={formik.handleBlur}
+    
+                                        />
+                                        <TextField
+                                            margin="dense"
+                                            id="degree"
+                                            label="degree"
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={formik.handleChange}
+                                            defaultValue={formik.values.degree}
+                                            helperText={formik.errors.degree}
+                                            error={formik.errors.degree && formik.touched.degree}
+                                            onBlur={formik.handleBlur}
+                                        />
+                                        <DialogActions>
+                                            <Button onClick={handleClose}>Cancel</Button>
+                                            {
+                                                update ? <Button type="submit">Update</Button> :
+                                                    <Button type="submit">Submit</Button>
+                                            }
+                                        </DialogActions>
+                                    </DialogContent>
+                                </Form>
+                            </Formik>
+                        </Dialog>
+    
+    
+                        <Dialog
+                            open={Dopen}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {"Are You Sure Delete Data?"}
+                            </DialogTitle>
+                            <DialogActions>
+                                <Button onClick={handleClose}>NO</Button>
+                                <Button onClick={handleDelete}>
+                                    YES
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
+                    </div>
+                </Container>
+            </Box>)
+            }
+       </>
     );
 }
 

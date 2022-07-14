@@ -17,3 +17,16 @@ export const ADD_MEDICINE = 'ADD_MEDICINE'
 export const DELETE_MEDICINE = 'DELETE_MEDICINE'
 
 export const UPDATE_MEDICINE = 'UPDATE_MEDICINE'
+
+
+export const GET_DOCTORS = 'GET_DOCTORS'
+
+export const LOADING_DOCTOR = 'LOADING_DOCTOR'
+
+export const ERROR_DOCTOR = 'ERROR_DOCTOR'
+
+export const ADD_DOCTOR = 'ADD_DOCTOR'
+
+export const DELETE_DOCTOR = 'DELETE_DOCTOR'
+
+export const UPDATE_DOCTOR = 'UPDATE_DOCTOR'

@@ -41,11 +41,30 @@
       "expiry": "2027"
     }
   ],
-  "comments": [
+  "doctors": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "name": "AJAY",
+      "age": 30,
+      "degree": "BAMS"
+    },
+    {
+      "id": 2,
+      "name": "AXAY",
+      "age": 32,
+      "degree": "M.D"
+    },
+    {
+      "id": 3,
+      "name": "BHARGAV",
+      "age": 34,
+      "degree": "MS"
+    },
+    {
+      "id": 4,
+      "name": "JAYESH",
+      "age": 28,
+      "degree": "DM"
     }
   ],
   "profile": {
