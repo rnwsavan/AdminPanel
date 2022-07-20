@@ -19,6 +19,7 @@ import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import PersonIcon from '@mui/icons-material/Person';
 import { NavLink } from 'react-router-dom';
 import HourglassFullIcon from '@mui/icons-material/HourglassFull';
+import TaskIcon from '@mui/icons-material/Task';
 
 const drawerWidth = 240;
 
@@ -102,7 +103,8 @@ export default function Layout({ children }) {
     let listItem = [
         { lable: 'Medicine', to: '/medicine', icon: <MedicalServicesIcon /> },
         { lable: 'Doctor', to: '/doctor', icon: <PersonIcon /> },
-        { lable: 'Counter', to: '/counter', icon: < HourglassFullIcon /> }
+        { lable: 'Counter', to: '/counter', icon: < HourglassFullIcon /> },
+        { lable: 'Promises', to: '/Promise_Example', icon: < TaskIcon /> }
         
     ]
     
