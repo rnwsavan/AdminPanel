@@ -4,7 +4,7 @@ import { BASE_URL } from "../Urls/base_url";
 
 const instance = axios.create({
   baseURL: BASE_URL,
-  timeout: 3000,
+  timeout: 10000,
 });
 
 const sendRequest = (config) => {
