@@ -15,8 +15,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSelector, useDispatch } from 'react-redux';
 import { addDoctorData, deleteDoctor, getDoctor, upadateDoctor } from '../../Redux/Action/doctor.action';
+import { useContext } from 'react';
+import { TaskContext } from '../TaskOfContext/TaskContextProvider';
 
 function Doctor(props) {
+    const theme = useContext(TaskContext);
+    console.log(theme); 
+
+
     const [open, setOpen] = React.useState(false);
     const [data, setData] = useState([]);
     const [update, setUpdate] = useState();
@@ -164,8 +170,13 @@ function Doctor(props) {
         [])
 
     return (
-       <>
+    <div>
+        <h1>doctor data</h1>
+
+        
+        
             {
+                
                 doctorname.isLoading ? (
                     <p style={{ fontSize: '25px', fontWeight: 'bold', margin: '50px' }}>Please Loading...</p>
                 ):
@@ -173,9 +184,9 @@ function Doctor(props) {
                 <p style={{ fontSize: '25px', fontWeight: 'bold', margin: '50px' }}>{doctorname.error}</p>
                 : <Box>
                 <Container>
-                    <div>
+                    <div className={`main-bg ${theme.theme}`}>
     
-    
+                    <button onClick={() => theme.Toogle_theme(theme.theme)}>Change</button>
                         <center>
                             <h1 className='mb-5'>Doctor Data</h1>
                             <Button className='mt-5' variant="outlined" onClick={handleClickOpen}>
@@ -284,7 +295,7 @@ function Doctor(props) {
                 </Container>
             </Box>)
             }
-       </>
+       </div>
     );
 }
 

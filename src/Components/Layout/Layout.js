@@ -105,8 +105,8 @@ export default function Layout({ children }) {
         { lable: 'Doctor', to: '/doctor', icon: <PersonIcon /> },
         { lable: 'Counter', to: '/counter', icon: < HourglassFullIcon /> },
         { lable: 'Promises', to: '/Promise_Example', icon: < TaskIcon /> },
-        { lable: 'UseMemo', to: '/memo_Example', icon: <PersonIcon /> },
-        { lable: 'UseCallBack Function', to: '/usecallback_Example', icon: < HourglassFullIcon /> }
+        { lable: 'UseMemo Hook', to: '/memo_Example', icon: <PersonIcon /> },
+        { lable: 'UseCallBack Hook', to: '/usecallback_Example', icon: < HourglassFullIcon /> }
         
     ]
     
