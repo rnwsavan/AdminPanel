@@ -16,7 +16,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useSelector, useDispatch } from 'react-redux';
 import { addDoctorData, deleteDoctor, getDoctor, upadateDoctor } from '../../Redux/Action/doctor.action';
 import { useContext } from 'react';
-import { TaskContext } from '../TaskOfContext/TaskContextProvider';
+import { TaskContext} from '../TaskOfContext/TaskContextProvider';
+import '../../App.css'
 
 function Doctor(props) {
     const theme = useContext(TaskContext);
@@ -170,11 +171,8 @@ function Doctor(props) {
         [])
 
     return (
-    <div>
-        <h1>doctor data</h1>
-
-        
-        
+    <div className={`${theme.theme}`}>
+                
             {
                 
                 doctorname.isLoading ? (
@@ -184,14 +182,16 @@ function Doctor(props) {
                 <p style={{ fontSize: '25px', fontWeight: 'bold', margin: '50px' }}>{doctorname.error}</p>
                 : <Box>
                 <Container>
-                    <div className={`main-bg ${theme.theme}`}>
+                    <div className={`d-flex align-items-center fixed-top ${theme.theme}`}>
     
-                    <button onClick={() => theme.Toogle_theme(theme.theme)}>Change</button>
+                    
                         <center>
                             <h1 className='mb-5'>Doctor Data</h1>
+                            <button className='mb-5'  onClick={() => theme.toogle_theme(theme.theme)}>Change</button>
                             <Button className='mt-5' variant="outlined" onClick={handleClickOpen}>
                                 Add Doctor Data
                             </Button>
+                           
                         </center>
     
                         <div style={{ height: 400, width: '100%', margin: '30px' }}>

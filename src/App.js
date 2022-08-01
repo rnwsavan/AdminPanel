@@ -12,7 +12,6 @@ import UseCallBack from "./Containers/UseCallExample/UseCallBack";
 import TaskContextProvider from "./Containers/TaskOfContext/TaskContextProvider";
 
 
-
 function App() {
 
   const { store, persistor } = configureStore();
@@ -28,8 +27,7 @@ function App() {
                 <Route exact path={"/counter"} component={Counter} />
                 <Route exact path={"/Promise_Example"} component={PromisesExample} />
                 <Route exact path={"/memo_Example"} component={HookExample} />
-                <Route exact path={"/usecallback_Example"} component={UseCallBack} />
-            
+                <Route exact path={"/usecallback_Example"} component={UseCallBack} />   
 
 
               </Switch>
